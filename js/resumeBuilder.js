@@ -23,7 +23,7 @@ var bio = {
 			var formattedRole   = HTMLheaderRole.replace("%data%", bio.role);
 			var formattedName   = HTMLheaderName.replace("%data%",bio.name);
 			var formattedBiopic = HTMLbioPic.replace("%data%",bio.biopic);
-			var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage);
+			var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%",bio.WelcomeMessage);
 
 			$("#header").prepend(formattedRole);
 			$("#header").prepend(formattedName);
@@ -37,22 +37,14 @@ var bio = {
 					}
 			},
 
-		"TopContactsdisplay":function(){
+		"Contactsdisplay":function(){
 			var formattedMobile   = HTMLmobile.replace("%data%",bio.contact.mobile);
 			var formattedEmail    = HTMLemail.replace("%data%",bio.contact.email);
 			var formattedGithub   = HTMLgithub.replace("%data%",bio.contact.github);
 			var formattedTwitter  = HTMLtwitter.replace("%data%",bio.contact.twitter);
 			var formattedLocation = HTMLlocation.replace("%data%",bio.contact.location);
-			$("#topContacts").append(formattedMobile, formattedEmail, formattedGithub, formattedTwitter, formattedLocation);
+			$("#topContacts, #footerContacts").append(formattedMobile, formattedEmail, formattedGithub, formattedTwitter, formattedLocation);
 		},
-		"FooterContactsdisplay": function(){
-			var formattedMobile   = HTMLmobile.replace("%data%",bio.contact.mobile);
-			var formattedEmail    = HTMLemail.replace("%data%",bio.contact.email);
-			var formattedGithub   = HTMLgithub.replace("%data%",bio.contact.github);
-			var formattedTwitter  = HTMLtwitter.replace("%data%",bio.contact.twitter);
-			var formattedLocation = HTMLlocation.replace("%data%",bio.contact.location);
-			$("#footerContacts").append(formattedMobile,formattedEmail, formattedGithub, formattedTwitter, formattedLocation);
-		}
 	};
 
 var work = {
@@ -82,8 +74,7 @@ var work = {
 	"display": function(){
 		for( var job in work.jobs){
 			$("#workExperience").append(HTMLworkStart);
-			$(".work-entry:last").append(HTMLworkEmployer.replace("%data%", work.jobs[job].employer));
-			$(".work-entry:last").append(HTMLworkTitle.replace("%data%", work.jobs[job].title));
+			$(".work-entry:last").append((HTMLworkEmployer.replace("%data%", work.jobs[job].employer)) + (HTMLworkTitle.replace("%data%", work.jobs[job].title)));
 			$(".work-entry:last").append(HTMLworkDates.replace("%data%", work.jobs[job].dates));
 			$(".work-entry:last").append(HTMLworkLocation.replace("%data%", work.jobs[job].location));
 			$(".work-entry:last").append(HTMLworkDescription.replace("%data%", work.jobs[job].description));
@@ -98,19 +89,19 @@ var project = {
 			"title": "ENOT",
 			"dates":"2012-2013",
 			"description":"identifies and tracks DSL outages",
-			"image": "images/fry.jpg"
+			"image": ["images/fry.jpg"]
 		},
 		{
 			"title": "Scorecard",
 			"dates":"2013-Present",
 			"description":"Reports Tier 1 metrics",
-			"image": "images/fry.jpg"	
+			"image": ["images/fry.jpg"]	
 		},
 		{
 			"title": "CAPP",
 			"dates":"2013-Present",
 			"description":"Tracks tier 1 payout incentive",
-			"image": "images/fry.jpg"
+			"image": ["images/fry.jpg"]
 		}		
 	],
 	"display":function(){
@@ -144,18 +135,6 @@ var education = {
 			"url": "https://www.itt-tech.edu"
 		}
 	],
-	"schoolsDisplay":function(){
-		for(var edu in education.schools){
-			$("#education").append(HTMLschoolStart);
-			$(".education-entry:last").append(HTMLschoolName.replace("%data%", education.schools[edu].name) + HTMLschoolDegree.replace("%data%", education.schools[edu].degree));
-			$(".education-entry:last").append(HTMLschoolDates.replace("%data%", education.schools[edu].dates));
-			$(".education-entry:last").append(HTMLschoolMajor.replace("%data%", education.schools[edu].majors));
-			$(".education-entry:last").append(HTMLschoolLocation.replace("%data%", education.schools[edu].location));			
-			
-			
-			
-		}
-	},
 	"onlineCourses": [
 		{
 			"title": "JavaScript Syntax",
@@ -163,25 +142,30 @@ var education = {
 			"date": "2016",
 			"url": "http://www.udacity.com/course/ud804"
 		}
-	],
-	"onlineDisplay":function(){
+	],	
+	"Display":function(){
+		for(var edu in education.schools){
+			$("#education").append(HTMLschoolStart);
+			$(".education-entry:last").append(HTMLschoolName.replace("%data%", education.schools[edu].name) + HTMLschoolDegree.replace("%data%", education.schools[edu].degree));
+			$(".education-entry:last").append(HTMLschoolDates.replace("%data%", education.schools[edu].dates));
+			$(".education-entry:last").append(HTMLschoolMajor.replace("%data%", education.schools[edu].majors));
+			$(".education-entry:last").append(HTMLschoolLocation.replace("%data%", education.schools[edu].location));			
+		}
 		for(var OnlineEdu in education.onlineCourses){
 			$("#education").append(HTMLonlineClasses);
 			$("#education").append(HTMLschoolStart);
 			$(".education-entry:last").append(HTMLonlineTitle.replace("%data%",education.onlineCourses[OnlineEdu].title) + HTMLonlineSchool.replace("%data%",education.onlineCourses[OnlineEdu].school));
 			$(".education-entry:last").append(HTMLonlineDates.replace("%data%",education.onlineCourses[OnlineEdu].date));
 			$(".education-entry:last").append(HTMLonlineURL.replace("%data%",education.onlineCourses[OnlineEdu].url));
-		}
-	}
+		}			
+	},
 };
 
 bio.display();
-bio.TopContactsdisplay();
-bio.FooterContactsdisplay();
+bio.Contactsdisplay();
 work.display();
 project.display();
-education.schoolsDisplay();
-education.onlineDisplay();
+education.Display();
 
 function inName() {
   var name = window.name;
@@ -195,5 +179,3 @@ function inName() {
 
 $('#main').append(internationalizeButton);
 $("#mapDiv").append(googleMap);
-
-
