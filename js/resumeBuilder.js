@@ -1,7 +1,7 @@
 var bio = {
 		"name" : "James Watkins",
 		"role" : "Professional Applications Developer",
-		"contact" : {
+		"contacts" : {
 			"mobile": "314-504-4892",
 			"email": "jw5717@att.com",
 			"work": "314-592-5032", 
@@ -23,28 +23,23 @@ var bio = {
 			var formattedRole   = HTMLheaderRole.replace("%data%", bio.role);
 			var formattedName   = HTMLheaderName.replace("%data%",bio.name);
 			var formattedBiopic = HTMLbioPic.replace("%data%",bio.biopic);
-			var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%",bio.WelcomeMessage);
+			var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage);
+			var formattedMobile   = HTMLmobile.replace("%data%",bio.contacts.mobile);
+			var formattedEmail    = HTMLemail.replace("%data%",bio.contacts.email);
+			var formattedGithub   = HTMLgithub.replace("%data%",bio.contacts.github);
+			var formattedTwitter  = HTMLtwitter.replace("%data%",bio.contacts.twitter);
+			var formattedLocation = HTMLlocation.replace("%data%",bio.contacts.location);
 
 			$("#header").prepend(formattedRole);
 			$("#header").prepend(formattedName);
 			$("#header").append(formattedBiopic);
 			$("#header").append(formattedWelcomeMessage);
-
-			//Skills are NOT allining properly!!!
+			$("#topContacts, #footerContacts").append(formattedMobile, formattedEmail, formattedGithub, formattedTwitter, formattedLocation);
 			$("#header").append(HTMLskillsStart);
 			for(var i=0;  i<bio.skills.length; i++){
 						$("#skills").append(HTMLskills.replace("%data%",bio.skills[i]));
 					}
 			},
-
-		"Contactsdisplay":function(){
-			var formattedMobile   = HTMLmobile.replace("%data%",bio.contact.mobile);
-			var formattedEmail    = HTMLemail.replace("%data%",bio.contact.email);
-			var formattedGithub   = HTMLgithub.replace("%data%",bio.contact.github);
-			var formattedTwitter  = HTMLtwitter.replace("%data%",bio.contact.twitter);
-			var formattedLocation = HTMLlocation.replace("%data%",bio.contact.location);
-			$("#topContacts, #footerContacts").append(formattedMobile, formattedEmail, formattedGithub, formattedTwitter, formattedLocation);
-		},
 	};
 
 var work = {
@@ -83,34 +78,34 @@ var work = {
 	}
 };
 
-var project = {
+var projects = {
 	"projects": [
 		{
 			"title": "ENOT",
 			"dates":"2012-2013",
 			"description":"identifies and tracks DSL outages",
-			"image": ["images/fry.jpg"]
+			"images": ["images/fry.jpg"]
 		},
 		{
 			"title": "Scorecard",
 			"dates":"2013-Present",
 			"description":"Reports Tier 1 metrics",
-			"image": ["images/fry.jpg"]	
+			"images": ["images/fry.jpg"]	
 		},
 		{
 			"title": "CAPP",
 			"dates":"2013-Present",
 			"description":"Tracks tier 1 payout incentive",
-			"image": ["images/fry.jpg"]
+			"images": ["images/fry.jpg"]
 		}		
 	],
 	"display":function(){
-		for(var proj in project.projects){
+		for(var proj in projects.projects){
 				$("#projects").append(HTMLprojectStart);
-				$(".project-entry:last").append(HTMLprojectTitle.replace("%data%", project.projects[proj].title));
-				$(".project-entry:last").append(HTMLprojectDates.replace("%data%", project.projects[proj].dates));
-				$(".project-entry:last").append(HTMLprojectDescription.replace("%data%", project.projects[proj].description));
-				$(".project-entry:last").append(HTMLprojectImage.replace("%data%", project.projects[proj].image));
+				$(".project-entry:last").append(HTMLprojectTitle.replace("%data%", projects.projects[proj].title));
+				$(".project-entry:last").append(HTMLprojectDates.replace("%data%", projects.projects[proj].dates));
+				$(".project-entry:last").append(HTMLprojectDescription.replace("%data%", projects.projects[proj].description));
+				$(".project-entry:last").append(HTMLprojectImage.replace("%data%", projects.projects[proj].images));
 				
 		}
 	}
@@ -143,7 +138,7 @@ var education = {
 			"url": "http://www.udacity.com/course/ud804"
 		}
 	],	
-	"Display":function(){
+	"display":function(){
 		for(var edu in education.schools){
 			$("#education").append(HTMLschoolStart);
 			$(".education-entry:last").append(HTMLschoolName.replace("%data%", education.schools[edu].name) + HTMLschoolDegree.replace("%data%", education.schools[edu].degree));
@@ -162,10 +157,9 @@ var education = {
 };
 
 bio.display();
-bio.Contactsdisplay();
 work.display();
-project.display();
-education.Display();
+projects.display();
+education.display();
 
 function inName() {
   var name = window.name;
@@ -179,3 +173,5 @@ function inName() {
 
 $('#main').append(internationalizeButton);
 $("#mapDiv").append(googleMap);
+
+
