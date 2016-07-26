@@ -67,7 +67,7 @@ var work = {
 		}		
 	],
 	"display": function(){
-		for( var job in work.jobs){
+		for (var job = 0; job < work.jobs.length; job++) {
 			$("#workExperience").append(HTMLworkStart);
 			$(".work-entry:last").append((HTMLworkEmployer.replace("%data%", work.jobs[job].employer)) + (HTMLworkTitle.replace("%data%", work.jobs[job].title)));
 			$(".work-entry:last").append(HTMLworkDates.replace("%data%", work.jobs[job].dates));
@@ -100,13 +100,14 @@ var projects = {
 		}		
 	],
 	"display":function(){
-		for(var proj in projects.projects){
+		for (var proj = 0; proj < projects.projects.length; proj++) {
 				$("#projects").append(HTMLprojectStart);
 				$(".project-entry:last").append(HTMLprojectTitle.replace("%data%", projects.projects[proj].title));
 				$(".project-entry:last").append(HTMLprojectDates.replace("%data%", projects.projects[proj].dates));
 				$(".project-entry:last").append(HTMLprojectDescription.replace("%data%", projects.projects[proj].description));
-				$(".project-entry:last").append(HTMLprojectImage.replace("%data%", projects.projects[proj].images));
-				
+				for (var image = 0; image < projects.projects[proj].images.length; image++) {
+					$(".project-entry:last").append(HTMLprojectImage.replace("%data%", projects.projects[proj].images[image]));
+				}
 		}
 	}
 };
@@ -139,14 +140,14 @@ var education = {
 		}
 	],	
 	"display":function(){
-		for(var edu in education.schools){
+		for (var edu = 0; edu < education.schools.length; edu++) {
 			$("#education").append(HTMLschoolStart);
 			$(".education-entry:last").append(HTMLschoolName.replace("%data%", education.schools[edu].name) + HTMLschoolDegree.replace("%data%", education.schools[edu].degree));
 			$(".education-entry:last").append(HTMLschoolDates.replace("%data%", education.schools[edu].dates));
 			$(".education-entry:last").append(HTMLschoolMajor.replace("%data%", education.schools[edu].majors));
 			$(".education-entry:last").append(HTMLschoolLocation.replace("%data%", education.schools[edu].location));			
 		}
-		for(var OnlineEdu in education.onlineCourses){
+		for (var OnlineEdu = 0; OnlineEdu < education.onlineCourses.length; OnlineEdu++) {
 			$("#education").append(HTMLonlineClasses);
 			$("#education").append(HTMLschoolStart);
 			$(".education-entry:last").append(HTMLonlineTitle.replace("%data%",education.onlineCourses[OnlineEdu].title) + HTMLonlineSchool.replace("%data%",education.onlineCourses[OnlineEdu].school));
